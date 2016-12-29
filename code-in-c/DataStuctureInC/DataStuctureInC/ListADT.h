@@ -14,7 +14,7 @@
 */
 #pragma once
 
-//The Linked List
+//The Linked List with a header/dummy node
 #ifndef _ListADT_H
 typedef  int ElementType;
 struct Node;
@@ -23,18 +23,37 @@ typedef PtrToNode List;
 typedef PtrToNode Position;
 
 /*operations on the list ADT */
+
+/////////////////////////////////////////////////////////////////////////////
+// 
+//    extern List MakeEmpty(List L)
+// 
+//    功能：
+//            链表(含表头)置空
+// 
+//    参数：
+//			  待处理链表L
+// 
+//    描述：
+//			  释放链表占用空间，保留表头
+//
+//    返回：
+//			  带表头的空链表
+////////////////////////////////////////////////////////////////////////////
 extern List MakeEmpty(List L);
+
 extern int IsEmpty(List L);
 extern int IsLast(Position P,List L);
 extern Position Find(ElementType X,List L);
 extern void Delete(ElementType X,List L);
-extern Position FindPrevious(ElementType X,List L);
 extern void Insert(ElementType X,List L,Position P);
 extern void DeleteList(List L);
 extern Position Header(List L);
 extern Position First(List L);
 extern Position Advance(Position P);
 extern ElementType Retrieve(Position P);
+
+static Position FindPrevious(ElementType X, List L);
 
 #endif
 
