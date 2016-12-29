@@ -117,26 +117,42 @@ void Insert(ElementType X, List L, Position P)
 	P->Next = Tmp;
 }
 
+/*make L empty,reserve a header*/
 void DeleteList(List L)
 {
+	Position P, Tmp;
+
+	P = L->Next;
+	L->Next = NULL;
+
+	if (P != NULL)
+	{
+		Tmp = P->Next;
+		free(P);
+		P = Tmp;
+	}
 }
 
+/*return the header of L*/
 Position Header(List L)
 {
-	return Position();
+	return L;
 }
 
+/*return the first node of L*/
 Position First(List L)
 {
-	return Position();
+	return L->Next;
 }
 
+/*Return the node after P*/
 Position Advance(Position P)
 {
-	return Position();
+	return P->Next;
 }
 
+/*Return the Element of P*/
 ElementType Retrieve(Position P)
 {
-	return ElementType();
+	return P->Element;
 }
