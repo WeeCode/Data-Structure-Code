@@ -77,7 +77,7 @@ void PrintList(List L)
 		printf("%d\n",P->Element);
 		P = P->Next;
 	}
-	printf("list end/n");
+	printf("list end\n");
 }
 
 /* Return ture/1 if P is the last position of L  */
