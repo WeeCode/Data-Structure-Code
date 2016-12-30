@@ -126,7 +126,7 @@ void RadixSort(ElementType *Data, int Num)
 	for ( i = 0; i < Num; i++)
 	{
 		tmp = (*(Data + i))%10;
-		InsertBySize(*(Data + i), list[tmp]);
+		InsertInEnd(*(Data + i), list[tmp]);
 	}
 	/*loop until sorted*/
 	while (!isEmpty)
