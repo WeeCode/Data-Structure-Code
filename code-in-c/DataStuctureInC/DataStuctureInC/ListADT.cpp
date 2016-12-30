@@ -33,6 +33,20 @@ int IsEmpty(List L)
 	return L->Next == NULL;
 }
 
+/*return an empty List L with a header*/
+List InitList()
+{
+	List L;
+
+	L = (List)malloc(sizeof(struct Node));
+	if (L == NULL)
+		perror("malloc error: out of space!");
+	L->Next = NULL;
+	L->Element = 0;
+
+	return L;
+}
+
 /*Return an empty list L,with a header*/
 List MakeEmpty(List L)
 {
