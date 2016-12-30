@@ -51,6 +51,21 @@ List MakeEmpty(List L)
 	return L;
 }
 
+/*Print element of L from head to bottom*/
+void PrintList(List L)
+{
+	Position P;
+
+	P = L->Next;
+	printf("print list:\n");
+	while (P!=NULL)
+	{
+		printf("%d\n",P->Element);
+		P = P->Next;
+	}
+	printf("list end/n");
+}
+
 /* Return ture/1 if P is the last position of L  */
 int IsLast(Position P, List L)
 {

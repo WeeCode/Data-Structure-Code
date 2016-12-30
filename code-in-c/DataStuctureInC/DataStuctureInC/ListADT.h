@@ -41,7 +41,7 @@ typedef PtrToNode Position;
 //			  带表头的空链表
 ////////////////////////////////////////////////////////////////////////////
 extern List MakeEmpty(List L);
-
+extern void PrintList(List L);
 extern int IsEmpty(List L);
 extern int IsLast(Position P,List L);
 extern Position Find(ElementType X,List L);
