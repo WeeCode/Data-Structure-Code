@@ -132,13 +132,13 @@ void Insert(ElementType X, List L, Position P)
 	P->Next = Tmp;
 }
 
-/*make L empty,reserve a header*/
+/*Delete L completely,include it's header,free space*/
 void DeleteList(List L)
 {
 	Position P, Tmp;
 
-	P = L->Next;
-	L->Next = NULL;
+	P = L;
+	L = NULL;
 
 	if (P != NULL)
 	{
