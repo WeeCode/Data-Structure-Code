@@ -106,6 +106,7 @@ Position Find(ElementType X, List L)
 	return P;
 }
 
+/*RadixSort with linked list operation,Input an array*/
 void RadixSort(ElementType *Data, int Num)
 {
 	List list[10],list_mirror[10]; //基数为0-9的链表
@@ -184,7 +185,7 @@ void RadixSort(ElementType *Data, int Num)
 	}
 
 }
-
+/*design for RadixSort funtion*/
 void SortMove(List orig[], List obj[], int divisor)
 {
 	int i,tmp;
