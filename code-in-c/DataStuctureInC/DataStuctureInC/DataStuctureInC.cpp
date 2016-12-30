@@ -8,9 +8,10 @@
 #include "ListADT.h"
 
 static int Test_List();
+static int test_RadixSort();
 int main()
 {
-	Test_List();
+	test_RadixSort();
 
     return 0;
 }
@@ -48,5 +49,19 @@ int Test_List()
 	printf("is empty?  %d\n",IsEmpty(L));
 	PrintList(L);
 	
+	return 0;
+}
+
+int test_RadixSort()
+{
+	int i = 0;
+	ElementType data[10] = {12, 23, 4, 34, 123, 112, 2423, 111, 96, 667};
+	RadixSort(data,10);
+
+	for ( i = 0; i < 10; i++)
+	{
+		printf("the %dth num is: %d \n",i+1,data[i] );
+	}
+
 	return 0;
 }

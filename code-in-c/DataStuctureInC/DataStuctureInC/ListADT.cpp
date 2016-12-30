@@ -34,7 +34,7 @@ int IsEmpty(List L)
 }
 
 /*return an empty List L with a header*/
-List InitList()
+List InitList(ElementType headerElement)
 {
 	List L;
 
@@ -42,7 +42,7 @@ List InitList()
 	if (L == NULL)
 		perror("malloc error: out of space!");
 	L->Next = NULL;
-	L->Element = 0;
+	L->Element = headerElement;
 
 	return L;
 }
@@ -106,6 +106,103 @@ Position Find(ElementType X, List L)
 	return P;
 }
 
+void RadixSort(ElementType *Data, int Num)
+{
+	List list[10],list_mirror[10]; //基数为0-9的链表
+	Position header[10],header_mirror[10];
+	Position node;
+	ElementType tmp;
+	bool isEmpty = false;
+	bool isMirror = true;
+	int i,divisor = 1;
+
+	/*linked list array init*/
+	for ( i = 0; i < 10; i++)
+	{
+		list[i] = InitList(i);
+		list_mirror[i] = InitList(i);
+	}
+	/*pull array data  to corresponding linked list*/
+	for ( i = 0; i < Num; i++)
+	{
+		tmp = (*(Data + i))%10;
+		InsertBySize(*(Data + i), list[tmp]);
+	}
+	/*loop until sorted*/
+	while (!isEmpty)
+	{
+		divisor *= 10;
+		isEmpty = true;
+		isMirror = !isMirror;
+		if (isMirror)
+		{
+			SortMove(list_mirror, list,divisor);
+			for (i = 1; i < 10; i++)
+			{
+				isEmpty = isEmpty && IsEmpty(list[i]);
+			}
+		}
+		else
+		{
+			SortMove(list, list_mirror, divisor);
+			for (i = 1; i < 10; i++)
+			{
+				isEmpty = isEmpty && IsEmpty(list_mirror[i]);
+			}
+		}
+	}
+	/*output the sorted array from linked list*/
+	if (isMirror)
+	{
+		node = list[0]->Next;
+		for ( i = 0; i < Num; i++)
+		{
+			if (node!=NULL)
+			{
+				*(Data + i) = Retrieve(node);
+				node = node->Next;
+			}
+		}
+	}
+	else
+	{
+		node = list_mirror[0]->Next;
+		for (i = 0; i < Num; i++)
+		{
+			if (node != NULL)
+			{
+				*(Data + i) = Retrieve(node);
+				node = node->Next;
+			}
+		}
+	}
+	/*free the memory*/
+	for ( i = 0; i < 10; i++)
+	{
+		DeleteList(list[i]);
+		DeleteList(list_mirror[i]);
+	}
+
+}
+
+void SortMove(List orig[], List obj[], int divisor)
+{
+	int i,tmp;
+	Position P, header[10];
+
+	for ( i = 0; i < 10; i++)
+	{
+		P = orig[i]->Next;
+		while (P!=NULL)
+		{
+			tmp = (Retrieve(P) / divisor) % 10;
+			InsertInEnd(Retrieve(P), obj[tmp]);
+			P = P->Next;
+		}
+		MakeEmpty(orig[i]);
+	}
+}
+
 /*If X is not found, the next node of returned position is NULL */
 Position FindPrevious(ElementType X, List L)
 {
@@ -144,6 +241,31 @@ void Insert(ElementType X, List L, Position P)
 	Tmp->Element = X;
 	Tmp->Next = P->Next;
 	P->Next = Tmp;
+}
+
+/*Insert element by it's size,make linked list increment*/
+void InsertBySize(ElementType X, List L)
+{
+	Position P;
+
+	P = L;
+	while (P->Next!=NULL && P->Next->Element < X )
+	{
+		P = P->Next;
+	}
+	Insert(X,L,P);
+}
+
+void InsertInEnd(ElementType X, List L)
+{
+	Position P;
+
+	P = L;
+	while (P->Next!=NULL)
+	{
+		P = P->Next;
+	}
+	Insert(X, L, P);
 }
 
 /*Delete L completely,include it's header,free space*/
