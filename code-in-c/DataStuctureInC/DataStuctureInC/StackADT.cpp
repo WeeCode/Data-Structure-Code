@@ -46,8 +46,20 @@ Stack CreateStack(void)
 	return S;
 }
 
+/*Delete stack S completely,include it's header,free memory*/
 void DisposeStack(Stack S)
 {
+	PtrToNode node, tmp;
+
+	node = S;
+	S = NULL;
+
+	while (node != NULL)
+	{
+		tmp = node->Next;
+		free(node);
+		node = tmp;
+	}
 }
 
 /*Make stack S empty,free memory of it's node */
