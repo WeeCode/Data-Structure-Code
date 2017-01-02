@@ -26,10 +26,10 @@ typedef PtrToNode Position;
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-//    extern List InitList()
+//    extern List CreateList()
 // 
 //    功能：
-//            链表(含表头)初始化
+//            生成链表(含表头)
 // 
 //    参数：
 //			  无
@@ -40,11 +40,11 @@ typedef PtrToNode Position;
 //    返回：
 //			  带表头的空链表
 ////////////////////////////////////////////////////////////////////////////
-extern List InitList(ElementType headerElement = 0);
+extern List CreateList(ElementType headerElement = 0);
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-//    extern List MakeEmpty(List L)
+//    extern List MakeListEmpty(List L)
 // 
 //    功能：
 //            链表(含表头)置空
@@ -58,7 +58,7 @@ extern List InitList(ElementType headerElement = 0);
 //    返回：
 //			  带表头的空链表
 ////////////////////////////////////////////////////////////////////////////
-extern List MakeEmpty(List L);
+extern List MakeListEmpty(List L);
 
 /////////////////////////////////////////////////////////////////////////////
 // 
@@ -80,7 +80,7 @@ extern void PrintList(List L);
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-//    extern int IsEmpty(List L)
+//    extern int IsListEmpty(List L)
 // 
 //    功能：
 //            判断链表(含表头)是否为空链表
@@ -95,7 +95,7 @@ extern void PrintList(List L);
 //			  true/1: 空链表
 //            false/0:非空链表
 ////////////////////////////////////////////////////////////////////////////
-extern int IsEmpty(List L);
+extern int IsListEmpty(List L);
 
 /////////////////////////////////////////////////////////////////////////////
 // 
@@ -219,7 +219,7 @@ extern void InsertInEnd(ElementType X, List L);
 //			  L：待处理链表L
 // 
 //    描述：
-//			  删除链表（包括表头），释放空间，置L = NULL
+//			  删除链表（包括表头），释放空间，置L = NULL(函数调用返回后S不是NULL)
 //			  
 //    返回：
 //			  无

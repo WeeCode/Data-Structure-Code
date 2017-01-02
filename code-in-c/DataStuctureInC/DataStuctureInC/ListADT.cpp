@@ -28,13 +28,13 @@ struct Node
 /*-----------function to operate the linked list ADT----------*/
 
 /* Return ture/1 if L is empty */
-int IsEmpty(List L)
+int IsListEmpty(List L)
 {
 	return L->Next == NULL;
 }
 
 /*return an empty List L with a header*/
-List InitList(ElementType headerElement)
+List CreateList(ElementType headerElement)
 {
 	List L;
 
@@ -48,7 +48,7 @@ List InitList(ElementType headerElement)
 }
 
 /*Return an empty list L,with a header*/
-List MakeEmpty(List L)
+List MakeListEmpty(List L)
 {
 	Position P,Tmp;
 
@@ -120,8 +120,8 @@ void RadixSort(ElementType *Data, int Num)
 	/*linked list array init*/
 	for ( i = 0; i < 10; i++)
 	{
-		list[i] = InitList(i);
-		list_mirror[i] = InitList(i);
+		list[i] = CreateList(i);
+		list_mirror[i] = CreateList(i);
 	}
 	/*pull array data  to corresponding linked list*/
 	for ( i = 0; i < Num; i++)
@@ -140,7 +140,7 @@ void RadixSort(ElementType *Data, int Num)
 			SortMove(list_mirror, list,divisor);
 			for (i = 1; i < 10; i++)
 			{
-				isEmpty = isEmpty && IsEmpty(list[i]);
+				isEmpty = isEmpty && IsListEmpty(list[i]);
 			}
 		}
 		else
@@ -148,7 +148,7 @@ void RadixSort(ElementType *Data, int Num)
 			SortMove(list, list_mirror, divisor);
 			for (i = 1; i < 10; i++)
 			{
-				isEmpty = isEmpty && IsEmpty(list_mirror[i]);
+				isEmpty = isEmpty && IsListEmpty(list_mirror[i]);
 			}
 		}
 	}
@@ -200,7 +200,7 @@ void SortMove(List orig[], List obj[], int divisor)
 			InsertInEnd(Retrieve(P), obj[tmp]);
 			P = P->Next;
 		}
-		MakeEmpty(orig[i]);
+		MakeListEmpty(orig[i]);
 	}
 }
 
