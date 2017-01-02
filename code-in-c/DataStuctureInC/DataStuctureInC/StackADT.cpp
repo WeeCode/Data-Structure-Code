@@ -13,8 +13,9 @@
 * 说    明：由带表头的链表实现栈
 */
 
-#include <stdlib.h>
+
 #include "stdafx.h"
+#include <stdlib.h>
 #include "StackADT.h"
 
 /*stack of linked list implementation*/
@@ -25,7 +26,7 @@ struct Node
 };
 
 /*Return ture/1 if stack S is empty*/
-int IsEmpty(Stack S)
+int IsStackEmpty(Stack S)
 {
 	return S->Next == NULL;
 }
@@ -63,7 +64,7 @@ void DisposeStack(Stack S)
 }
 
 /*Make stack S empty,free memory of it's node */
-void MakeEmpty(Stack S)
+void MakeStackEmpty(Stack S)
 {
 	PtrToNode node,tmp;
 
@@ -79,7 +80,7 @@ void MakeEmpty(Stack S)
 }
 
 /*Push element X onto stack S*/
-void Push(ElementType X, Stack S)
+void PushStack(ElementType X, Stack S)
 {
 	PtrToNode node;
 
@@ -97,9 +98,9 @@ void Push(ElementType X, Stack S)
 }
 
 /*Get top element on stack S, release error and return 0 if an empty stack*/
-ElementType Top(Stack S)
+ElementType TopStack(Stack S)
 {
-	if(!IsEmpty(S))
+	if(!IsStackEmpty(S))
 	{
 		return S->Next->Element;
 	}
@@ -109,11 +110,11 @@ ElementType Top(Stack S)
 }
 
 /* Pop/delete the first element on stack S */
-void Pop(Stack S)
+void PopStack(Stack S)
 {
 	PtrToNode node;
 
-	if (!IsEmpty(S))
+	if (!IsStackEmpty(S))
 	{
 		node = S->Next;
 		S->Next = node->Next;

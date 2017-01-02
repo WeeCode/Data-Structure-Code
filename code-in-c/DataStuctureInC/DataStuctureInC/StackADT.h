@@ -21,13 +21,13 @@ struct Node;
 typedef struct Node *PtrToNode;
 typedef PtrToNode Stack;
 
-extern int IsEmpty(Stack S);
+extern int IsStackEmpty(Stack S);
 extern Stack CreateStack(void);
 extern void DisposeStack(Stack S);
-extern void MakeEmpty(Stack S);
-extern void Push(ElementType X,Stack S);
-extern ElementType Top(Stack S);
-extern void Pop(Stack S);
+extern void MakeStackEmpty(Stack S);
+extern void PushStack(ElementType X,Stack S);
+extern ElementType TopStack(Stack S);
+extern void PopStack(Stack S);
 
 #endif // !_StackADT_h
 
