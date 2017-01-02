@@ -26,7 +26,7 @@ int Test_List(void)
 	ElementType tmp;
 	int i;
 
-	L = InitList();
+	L = CreateList();
 	PrintList(L);
 
 	header = Header(L);
@@ -46,9 +46,9 @@ int Test_List(void)
 	printf("the first element: %d\n", Retrieve(First(L)));
 	PrintList(L);
 
-	printf("is empty?  %d\n", IsEmpty(L));
-	MakeEmpty(L);
-	printf("is empty?  %d\n",IsEmpty(L));
+	printf("is empty?  %d\n", IsListEmpty(L));
+	MakeListEmpty(L);
+	printf("is empty?  %d\n",IsListEmpty(L));
 	PrintList(L);
 	DeleteList(L);
 	printf("delete list?%d\n", (L == NULL) ? 1 : 0);
