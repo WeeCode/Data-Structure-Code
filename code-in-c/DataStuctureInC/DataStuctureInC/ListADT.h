@@ -15,7 +15,7 @@
 #pragma once
 
 //The Linked List with a header/dummy node
-#ifndef _ListADT_H
+#ifndef _ListADT_h
 typedef  int ElementType;
 struct Node;
 typedef	struct Node *PtrToNode;
