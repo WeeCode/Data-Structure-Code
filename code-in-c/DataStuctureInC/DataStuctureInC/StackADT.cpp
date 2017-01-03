@@ -125,3 +125,24 @@ void PopStack(Stack S)
 		perror("Pop error: Pop an empty stack!");
 	}
 }
+
+/* Get the first element on stack S, then delete it, free it's memory */
+ElementType TopAndPopStack(Stack S)
+{
+	PtrToNode node;
+	ElementType first;
+
+	if (!IsStackEmpty(S))
+	{
+		node = S->Next;
+		S->Next = node->Next;
+		first = node->Element;
+		free(node);
+		return first;
+	}
+	else
+	{
+		perror("Pop error: Pop an empty stack!");
+		return 0;
+	}
+}

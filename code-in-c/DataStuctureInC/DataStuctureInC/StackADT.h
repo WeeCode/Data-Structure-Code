@@ -133,7 +133,7 @@ extern ElementType TopStack(Stack S);
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-//    extern ElementType TopStack(Stack S)
+//    extern ElementType PopStack(Stack S)
 // 
 //    功能：
 //            出栈(删除栈顶元素）
@@ -148,6 +148,24 @@ extern ElementType TopStack(Stack S);
 //			  无
 ////////////////////////////////////////////////////////////////////////////
 extern void PopStack(Stack S);
+
+/////////////////////////////////////////////////////////////////////////////
+// 
+//    extern ElementType TopAndPopStack(Stack S)
+// 
+//    功能：
+//            读栈顶然后出栈
+// 
+//    参数：
+//			  S：待处理栈S
+// 
+//    描述：
+//			  返回栈顶元素值，并删除栈顶节点,若是空栈则报错并返回0
+//
+//    返回：
+//			  栈顶元素值
+////////////////////////////////////////////////////////////////////////////
+extern ElementType TopAndPopStack(Stack S);
 
 #endif // !_StackADT_h
 
