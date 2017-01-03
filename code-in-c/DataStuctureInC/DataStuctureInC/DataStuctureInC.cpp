@@ -104,7 +104,7 @@ int test_Stack(void)
 
 int test_Postfix(void)
 {
-	char infix[128] = "11+2*3+(44*5+6)*77";
+	char infix[128] = "1+2*3+(4*5+6)*7";
 	char postfix[128] = "\0";
 	InfixToPostfix(infix, postfix);
 	printf("postfix is : %s \n",postfix);

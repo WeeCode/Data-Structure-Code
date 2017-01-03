@@ -225,6 +225,7 @@ void InfixToPostfix(char * infix, char * postfix)
 		*postfix++ = (char)TopAndPopStack(operatorStack);
 	}
 	*postfix = '\0';
+	DisposeStack(operatorStack);
 
 	return;
 
@@ -270,5 +271,70 @@ int OperatorPrecedence(char first, char second)
 			return 0;
 		else
 			return -1;
+	}
+}
+
+ElementType EvaluatePostfix(char *postfix)
+{
+	Stack dataSatck;
+	ElementType first,second,tmp;
+
+	dataSatck = CreateStack();
+	if (dataSatck == NULL)
+	{
+		perror("EvaluatePostfix error: create stack failed!\n");
+	}
+	/*loop until end of string postfix*/
+	while (*postfix != '\0')
+	{
+		if (*postfix >= '0' && *postfix <= '9')
+		{/*rule 1:when read a number, Push it onto dataSatck*/
+			PushStack((ElementType)*postfix++,dataSatck);
+		}
+		else if (*postfix == '+' || *postfix == '-' || *postfix == '*' || *postfix == '/')
+		{/*rule 2;when read an operator,applied with two numbers TopAndPop from dataSatck,
+				   then Push the result onto dataSatck*/
+			first = TopAndPopStack(dataSatck);
+			second = TopAndPopStack(dataSatck);
+			tmp = CalWithOperator(first, second, *postfix++);
+			PushStack(tmp,dataSatck);
+		}
+		else
+		{/*illlegal symbol*/
+			perror("EvaluatePostfix error: illlegal symbol in postfix!\n");
+			return -1;
+		}
+	}
+
+	/*assumed postfix is legal,the answer will be the top of dataSatck*/
+	tmp = TopStack(dataSatck);
+	DisposeStack(dataSatck);
+
+	return tmp;
+}
+
+/*apply operator to the two numbers,and return the answer*/
+ElementType CalWithOperator(ElementType first, ElementType second, char opera)
+{
+	if (opera == '+')
+	{
+		return (first + second);
+	}
+	else if (opera == '-')
+	{
+		return (first - second);
+	}
+	else if (opera == '*')
+	{
+		return (first * second);
+	}
+	else if (opera == '/')
+	{
+		return (first / second);
+	}
+	else
+	{
+		perror("CalWithOperator error: illegal operator!\n");
+		return -1;
 	}
 }

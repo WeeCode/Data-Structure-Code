@@ -172,7 +172,7 @@ extern ElementType TopAndPopStack(Stack S);
 //    extern void InfixToPostfix(char *infix, char *postfix)
 // 
 //    功能：
-//            中缀表达式(infix)转换为后缀表达式(postfix)，数值为整型
+//            中缀表达式(infix)转换为后缀表达式(postfix)，数值为正整型
 // 
 //    参数：
 //			  infix： 中缀表达式（输入）
@@ -186,6 +186,24 @@ extern ElementType TopAndPopStack(Stack S);
 extern void InfixToPostfix(char *infix, char *postfix);
 static int OperatorPrecedence(char first, char second);
 
+/////////////////////////////////////////////////////////////////////////////
+// 
+//    extern ElementType EvaluatePostfix(char *postfix)
+// 
+//    功能：
+//            求后缀表达式(postfix)的值，数值为个位正整数（1-9）
+// 
+//    参数：
+//			  postfix:后缀表达式（输入）
+//
+//    描述：
+//			  利用栈操作，对后缀表达式求值
+//
+//    返回：
+//			  后缀表达式的值（输出）
+////////////////////////////////////////////////////////////////////////////
+extern ElementType EvaluatePostfix(char *postfix);
+static ElementType CalWithOperator(ElementType first,ElementType second,char opera);
 #endif // !_StackADT_h
 
 
