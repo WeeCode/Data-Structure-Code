@@ -11,9 +11,10 @@
 static int Test_List(void);
 static int test_RadixSort(void);
 static int test_Stack(void);
+static int test_Postfix(void);
 int main()
 {
-	test_Stack();
+	test_Postfix();
 
     return 0;
 }
@@ -97,6 +98,16 @@ int test_Stack(void)
 	
 	printf("delete stack?%d\n",(S == NULL)?1:0 );
 
+
+	return 0;
+}
+
+int test_Postfix(void)
+{
+	char infix[128] = "11+2*3+(44*5+6)*77";
+	char postfix[128] = "\0";
+	InfixToPostfix(infix, postfix);
+	printf("postfix is : %s \n",postfix);
 
 	return 0;
 }

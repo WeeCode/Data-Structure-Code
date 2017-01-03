@@ -170,11 +170,16 @@ void InfixToPostfix(char * infix, char * postfix)
 
 		if (*infix >= '0' && *infix <= '9') 
 		{/*rule 1:when oprerand is read, immediately output*/
-			*(postfix++) = *(infix++);
+			*postfix++ = *infix++;
+			continue;
+		}
+		else if (*infix == '(')
+		{/*rule 2:when '(' is read, Pust onto operator stack*/
+			PushStack((ElementType)*infix++, operatorStack);
 			continue;
 		}
 		else if (*infix == ')')
-		{/*rule 2:when ')' is read, TopAndPop operator stack until encounter '('*/
+		{/*rule 3:when ')' is read, TopAndPop operator stack until encounter '('*/
 			for (; ; )
 			{
 				if (IsStackEmpty(operatorStack))
@@ -185,26 +190,25 @@ void InfixToPostfix(char * infix, char * postfix)
 				top = (char)TopAndPopStack(operatorStack);
 				if (top == '(')
 					break;
-				*(postfix++) = top;
+				*postfix++ = top;
 			}
 			infix++;
 			continue;
 		}
-		else if (*infix == '+' || *infix == '-' || *infix == '*' || *infix == '/' || *infix == '(')
-		{/*rule 3: when other symbol is read, TopAndPop operator stack until encounter entry with low priority,
+		else if (*infix == '+' || *infix == '-' || *infix == '*' || *infix == '/' )
+		{/*rule 4: when other symbol is read, TopAndPop operator stack until encounter entry with low priority,
 					then Pust that symbol onto operator stack*/
-			if (!IsStackEmpty(operatorStack))
+			while (!IsStackEmpty(operatorStack))/*empty stack or Pop has make stack empty*/
 			{
-				for (; ; )
+				top = (char)TopAndPopStack(operatorStack);			
+				if (OperatorPrecedence(top, *infix) < 0 || top == '(')/*encounter entry with low priority,or encounter '('*/
 				{
-					top = (char)TopAndPopStack(operatorStack);
-					if (OperatorPrecedence(top, *infix) < 0)/*encounter entry with low priority*/
-						break;
-					*(postfix++) = top;
+					PushStack((ElementType)top, operatorStack);
+					break;
 				}
-				PushStack((ElementType)top, operatorStack);
+				*postfix++ = top;
 			}
-			PushStack((ElementType)*(infix++),operatorStack);
+			PushStack((ElementType)*infix++,operatorStack);
 			continue;
 		}
 		else
@@ -215,11 +219,12 @@ void InfixToPostfix(char * infix, char * postfix)
 
 	}
 
-	/*rule 4: when end of Input is read, TopAndPop operator stack until empty*/
+	/*rule 5: when end of Input is read, TopAndPop operator stack until empty*/
 	while (!IsStackEmpty(operatorStack))
 	{
-		*(postfix++) = (char)TopAndPopStack(operatorStack);
+		*postfix++ = (char)TopAndPopStack(operatorStack);
 	}
+	*postfix = '\0';
 
 	return;
 
