@@ -104,10 +104,14 @@ int test_Stack(void)
 
 int test_Postfix(void)
 {
-	char infix[128] = "1+2*3+(4*5+6)*7";
+	ElementType answer;
+	char infix[128] = "1-4/2+(4*5-6)*7";
 	char postfix[128] = "\0";
+	printf("infix is : %s \n", infix);
 	InfixToPostfix(infix, postfix);
 	printf("postfix is : %s \n",postfix);
+	answer = EvaluatePostfix(postfix);
+	printf("the answer is : %d \n", answer);
 
 	return 0;
 }

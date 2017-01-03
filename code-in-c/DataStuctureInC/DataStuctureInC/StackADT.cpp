@@ -289,7 +289,8 @@ ElementType EvaluatePostfix(char *postfix)
 	{
 		if (*postfix >= '0' && *postfix <= '9')
 		{/*rule 1:when read a number, Push it onto dataSatck*/
-			PushStack((ElementType)*postfix++,dataSatck);
+			PushStack((ElementType)(*postfix++ - '0'),dataSatck);
+				/*convert char into int before push*/
 		}
 		else if (*postfix == '+' || *postfix == '-' || *postfix == '*' || *postfix == '/')
 		{/*rule 2;when read an operator,applied with two numbers TopAndPop from dataSatck,
@@ -318,19 +319,19 @@ ElementType CalWithOperator(ElementType first, ElementType second, char opera)
 {
 	if (opera == '+')
 	{
-		return (first + second);
+		return (second + first);
 	}
 	else if (opera == '-')
 	{
-		return (first - second);
+		return (second - first);
 	}
 	else if (opera == '*')
 	{
-		return (first * second);
+		return (second * first);
 	}
 	else if (opera == '/')
 	{
-		return (first / second);
+		return (second / first);
 	}
 	else
 	{
