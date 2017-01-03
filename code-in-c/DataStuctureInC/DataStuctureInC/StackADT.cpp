@@ -39,7 +39,7 @@ Stack CreateStack(void)
 	S = (Stack)malloc(sizeof(struct Node));
 	if (S == NULL)
 	{
-		perror("malloc error: out of space!");
+		perror("malloc error: out of space! \n");
 	}
 	S->Element = 0;
 	S->Next = NULL;
@@ -87,7 +87,7 @@ void PushStack(ElementType X, Stack S)
 	node = (Stack)malloc(sizeof(struct Node));
 	if (node == NULL)
 	{
-		perror("malloc error: out of space!");
+		perror("malloc error: out of space! \n");
 	}
 	else
 	{
@@ -105,7 +105,7 @@ ElementType TopStack(Stack S)
 		return S->Next->Element;
 	}
 
-	perror("Top error: top an empty stack!");
+	perror("Top error: top an empty stack! \n");
 	return 0;
 }
 
@@ -122,7 +122,7 @@ void PopStack(Stack S)
 	}
 	else
 	{
-		perror("Pop error: Pop an empty stack!");
+		perror("Pop error: Pop an empty stack! \n");
 	}
 }
 
@@ -142,7 +142,128 @@ ElementType TopAndPopStack(Stack S)
 	}
 	else
 	{
-		perror("Pop error: Pop an empty stack!");
+		perror("Pop error: Pop an empty stack! \n");
 		return 0;
+	}
+}
+
+void InfixToPostfix(char * infix, char * postfix)
+{
+	Stack operatorStack;
+	char top;
+
+	if (infix == NULL || postfix == NULL)
+	{
+		perror("Use NULL pointer in InfixToPostfix()! \n");
+	}
+
+	operatorStack = CreateStack();
+	if (operatorStack == NULL)
+	{
+		perror("InfixToPostfix: Create Stack Failed! \n");
+	}
+
+	/* loop until end of string infix*/
+	while (*infix != '\0')
+	{
+
+
+		if (*infix >= '0' && *infix <= '9') 
+		{/*rule 1:when oprerand is read, immediately output*/
+			*(postfix++) = *(infix++);
+			continue;
+		}
+		else if (*infix == ')')
+		{/*rule 2:when ')' is read, TopAndPop operator stack until encounter '('*/
+			for (; ; )
+			{
+				if (IsStackEmpty(operatorStack))
+				{
+					perror("InfixToPostfix: can't find '(' when read ')'! \n");
+					return;
+				}
+				top = (char)TopAndPopStack(operatorStack);
+				if (top == '(')
+					break;
+				*(postfix++) = top;
+			}
+			infix++;
+			continue;
+		}
+		else if (*infix == '+' || *infix == '-' || *infix == '*' || *infix == '/' || *infix == '(')
+		{/*rule 3: when other symbol is read, TopAndPop operator stack until encounter entry with low priority,
+					then Pust that symbol onto operator stack*/
+			if (!IsStackEmpty(operatorStack))
+			{
+				for (; ; )
+				{
+					top = (char)TopAndPopStack(operatorStack);
+					if (OperatorPrecedence(top, *infix) < 0)/*encounter entry with low priority*/
+						break;
+					*(postfix++) = top;
+				}
+				PushStack((ElementType)top, operatorStack);
+			}
+			PushStack((ElementType)*(infix++),operatorStack);
+			continue;
+		}
+		else
+		{/*illlegal symbol*/
+			perror("illegal input infix! \n");
+			return;
+		}
+
+	}
+
+	/*rule 4: when end of Input is read, TopAndPop operator stack until empty*/
+	while (!IsStackEmpty(operatorStack))
+	{
+		*(postfix++) = (char)TopAndPopStack(operatorStack);
+	}
+
+	return;
+
+}
+
+/*compare priority of two operator,
+	return -1 when first has a low priority then second operator;
+	return 0 when equal;
+	return 1 when first has a high priority then second operator;*/
+int OperatorPrecedence(char first, char second)
+{
+	if (first != '(' && first != ')' && first != '*' && first != '/' && first != '+' && first != '-')
+	{
+		perror("OperatorPrecedence: first operator illlegal! \n");
+		return -2;
+	}
+
+	if (second != '(' && second != ')' && second != '*' && second != '/' && second != '+' && second != '-')
+	{
+		perror("OperatorPrecedence: second operator illlegal! \n");
+		return -2;
+	}
+
+	if (first == '(' || first == ')')
+	{
+		if (second == '(' || second == ')')
+			return 0;
+		else
+			return 1;
+	}
+	else if (first == '*' || first == '/')
+	{
+		if (second == '(' || second == ')')
+			return -1;
+		else if (second == '*' || second == '/')
+			return 0;
+		else
+			return 1;
+	}
+	else
+	{
+		if (second == '+' || second == '-')
+			return 0;
+		else
+			return -1;
 	}
 }

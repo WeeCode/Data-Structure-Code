@@ -167,6 +167,25 @@ extern void PopStack(Stack S);
 ////////////////////////////////////////////////////////////////////////////
 extern ElementType TopAndPopStack(Stack S);
 
+/////////////////////////////////////////////////////////////////////////////
+// 
+//    extern void InfixToPostfix(char *infix, char *postfix)
+// 
+//    功能：
+//            中缀表达式(infix)转换为后缀表达式(postfix)，数值为整型
+// 
+//    参数：
+//			  infix： 中缀表达式（输入）
+//			  postfix:后缀表达式（输出）
+//    描述：
+//			  利用栈操作，将中缀表达式转化为对应的后缀表达式
+//
+//    返回：
+//			  无
+////////////////////////////////////////////////////////////////////////////
+extern void InfixToPostfix(char *infix, char *postfix);
+static int OperatorPrecedence(char first, char second);
+
 #endif // !_StackADT_h
 
 
