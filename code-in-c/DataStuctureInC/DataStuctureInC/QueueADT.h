@@ -17,5 +17,20 @@
 #ifndef _QUEUEADT_H_
 #define _QUEUEADT_H_
 
+typedef int ElementType;
+struct QueueRecord;
+typedef struct QueueRecord *Queue;
+
+extern int IsQueueEmpty(Queue Q);
+extern int IsQueueFull(Queue Q);
+extern Queue CreateQueue(int MaxElements);
+extern void DisposeQueue(Queue Q);
+extern void MakeQueueEmpty(Queue Q);
+extern void EnQueue(ElementType X,Queue Q);
+extern ElementType FrontQueue(Queue Q);
+extern void Dequeue(Queue Q);
+extern ElementType FrontAndDequeue(Queue Q);
+
+
 #endif // !_QUEUEADT_H_
 
