@@ -14,7 +14,8 @@
 */
 #pragma once
 
-#ifndef _StackADT_h
+#ifndef _STACKADT_H_
+#define	_STACKADT_H_
 
 typedef int ElementType;
 struct Node;
