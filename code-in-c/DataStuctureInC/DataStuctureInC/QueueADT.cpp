@@ -140,7 +140,7 @@ void DeQueue(Queue Q)
 	}
 }
 /*Get front element,then dequeue*/
-ElementType FrontAndDequeue(Queue Q)
+ElementType FrontAndDeQueue(Queue Q)
 {
 	ElementType tmp;
 

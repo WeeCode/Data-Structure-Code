@@ -191,7 +191,7 @@ extern void DeQueue(Queue Q);
 //			  队列首元素值
 //			  
 ////////////////////////////////////////////////////////////////////////////
-extern ElementType FrontAndDequeue(Queue Q);
+extern ElementType FrontAndDeQueue(Queue Q);
 
 
 #endif // !_QUEUEADT_H_
