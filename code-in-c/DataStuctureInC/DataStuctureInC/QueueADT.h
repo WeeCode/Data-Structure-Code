@@ -26,8 +26,10 @@ extern int IsQueueFull(Queue Q);
 extern Queue CreateQueue(int MaxElements);
 extern void DisposeQueue(Queue Q);
 extern void MakeQueueEmpty(Queue Q);
+
 extern void EnQueue(ElementType X,Queue Q);
 static int QueueSucc(int value,Queue Q);
+
 extern ElementType FrontQueue(Queue Q);
 extern void Dequeue(Queue Q);
 extern ElementType FrontAndDequeue(Queue Q);
