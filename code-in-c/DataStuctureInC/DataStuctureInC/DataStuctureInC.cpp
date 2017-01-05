@@ -7,14 +7,16 @@
 
 #include "ListADT.h"
 #include "StackADT.h"
+#include "QueueADT.h"
 
 static int Test_List(void);
 static int test_RadixSort(void);
 static int test_Stack(void);
 static int test_Postfix(void);
+static int test_Queue(void);
 int main()
 {
-	test_Postfix();
+	test_Queue();
 
     return 0;
 }
@@ -112,6 +114,48 @@ int test_Postfix(void)
 	printf("postfix is : %s \n",postfix);
 	answer = EvaluatePostfix(postfix);
 	printf("the answer is : %d \n", answer);
+
+	return 0;
+}
+
+int test_Queue(void)
+{
+	Queue Q;
+	int i;
+
+	Q = CreateQueue(3);
+	if (Q == NULL)
+	{
+		Q = CreateQueue(10);
+		if (Q == NULL)
+		{
+			perror("create queue error!\n");
+		}
+	}
+
+	printf("Is queue empty? %d\n", IsQueueEmpty(Q));
+	printf("Is queue full? %d\n", IsQueueFull(Q));
+	for ( i = 0; i < 11; i++)
+	{
+		EnQueue((ElementType)i, Q);
+		printf("the front on queue is: %d\n", FrontQueue(Q));
+	}
+	printf("Is queue empty? %d\n", IsQueueEmpty(Q));
+	printf("Is queue full? %d\n", IsQueueFull(Q));
+	for (i = 0; i < 5; i++)
+	{
+		DeQueue(Q);
+		printf("the front on queue is: %d\n", FrontQueue(Q));
+	}
+	printf("the front on queue is: %d\n", FrontAndDeQueue(Q));
+	printf("the front on queue is: %d\n", FrontQueue(Q));
+
+	printf("Is queue empty? %d\n", IsQueueEmpty(Q));
+	printf("Is queue full? %d\n", IsQueueFull(Q));
+	MakeQueueEmpty(Q);
+	printf("Is queue empty? %d\n", IsQueueEmpty(Q));
+	DisposeQueue(Q);
+	
 
 	return 0;
 }
