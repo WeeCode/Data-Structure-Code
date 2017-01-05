@@ -24,7 +24,7 @@
 -----------------------------------------------------------------
 	array index:	[0]  [1]  [2]  ...  [n] ...  [maxsize]		|
 						  |				 |						|
-		Dequeue	<---	front			rear    <---Enqueue		|
+		DeQueue	<---	front			rear    <---Enqueue		|
 -----------------------------------------------------------------
 */
 struct QueueRecord
@@ -126,8 +126,8 @@ ElementType FrontQueue(Queue Q)
 	}
 	
 }
-/*Dequeue fornt element*/
-void Dequeue(Queue Q)
+/*DeQueue fornt element*/
+void DeQueue(Queue Q)
 {
 	if (!IsQueueEmpty(Q))
 	{
@@ -136,7 +136,7 @@ void Dequeue(Queue Q)
 	}
 	else
 	{
-		perror("Dequeue error: Empty queue!\n");
+		perror("DeQueue error: Empty queue!\n");
 	}
 }
 /*Get front element,then dequeue*/
