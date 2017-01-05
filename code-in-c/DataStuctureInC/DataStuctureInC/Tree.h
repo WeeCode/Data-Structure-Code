@@ -16,6 +16,27 @@
 
 #ifndef _TREE_H_
 #define _TREE_H_
+typedef int ElementType;
+
+/*normal tree node, Applicable to all tree*/
+typedef struct NormalTreeNode *PtrToNorNode;
+typedef PtrToNorNode NormalTree;
+struct NormalTreeNode
+{
+	ElementType Element;
+	NormalTree FisrtChild;
+	NormalTree NextSibling;
+};
+
+/*binary tree node, Applicable to binary tree*/
+typedef struct BinaryTreeNode *PtrToBinNode;
+typedef PtrToBinNode BinaryTree;
+struct BinaryTreeNode
+{
+	ElementType Element;
+	BinaryTree Left;
+	BinaryTree Right;
+};
 
 #endif
 
