@@ -15,4 +15,41 @@
 
 #include "stdafx.h"
 #include <stdlib.h>
+#include "Tree.h"
 #include "BinarySearchTree.h"
+
+
+BinarySearchTree MakeBSTreeEmpty(BinarySearchTree T)
+{
+	return BinarySearchTree();
+}
+
+BStreePos FindBSTree(ElementType X, BinarySearchTree T)
+{
+	return BStreePos();
+}
+
+BStreePos FindMinBSTree(BinarySearchTree T)
+{
+	return BStreePos();
+}
+
+BStreePos FindMaxBSTree(BinarySearchTree T)
+{
+	return BStreePos();
+}
+
+BinarySearchTree InsertBSTree(ElementType X, BinarySearchTree T)
+{
+	return BinarySearchTree();
+}
+
+BinarySearchTree DeleteBSTree(ElementType X, BinarySearchTree T)
+{
+	return BinarySearchTree();
+}
+
+ElementType RetrieveBSTree(BStreePos P)
+{
+	return ElementType();
+}
