@@ -8,15 +8,18 @@
 #include "ListADT.h"
 #include "StackADT.h"
 #include "QueueADT.h"
+#include "BinarySearchTree.h"
 
 static int Test_List(void);
 static int test_RadixSort(void);
 static int test_Stack(void);
 static int test_Postfix(void);
 static int test_Queue(void);
+static int test_BinarySearchTree(void);
+
 int main()
 {
-	test_Queue();
+	test_BinarySearchTree();
 
     return 0;
 }
@@ -25,7 +28,7 @@ int main()
 int Test_List(void)
 {
 	List L;
-	Position header, first;
+	Position header;
 	ElementType tmp;
 	int i;
 
@@ -156,6 +159,38 @@ int test_Queue(void)
 	printf("Is queue empty? %d\n", IsQueueEmpty(Q));
 	DisposeQueue(Q);
 	
+
+	return 0;
+}
+
+int test_BinarySearchTree(void)
+{
+	BinarySearchTree T = NULL;
+	BStreePos P;
+
+	T = MakeBSTreeEmpty(T);
+		
+	T = InsertBSTree(1,T);
+	printf("the bigest element in T is :%d \n",FindMaxBSTree(T)->Element);
+	printf("the smallest element in T is :%d \n", FindMinBSTree(T)->Element);
+
+	T = InsertBSTree(3, T);
+	T = InsertBSTree(2, T);
+	T = InsertBSTree(5, T);
+	T = InsertBSTree(4, T);
+
+	P = FindBSTree(5, T);
+	printf("find element %d in T \n", RetrieveBSTree(P));
+
+	T = DeleteBSTree(5,T);
+	P = FindBSTree(5, T);
+	printf("find element %d in T \n", RetrieveBSTree(P));
+	T = DeleteBSTree(1, T);
+	printf("the bigest element in T is :%d \n", FindMaxBSTree(T)->Element);
+	printf("the smallest element in T is :%d \n", FindMinBSTree(T)->Element);
+
+	T = MakeBSTreeEmpty(T);
+
 
 	return 0;
 }

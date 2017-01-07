@@ -15,7 +15,6 @@
 
 #include "stdafx.h"
 #include <stdlib.h>
-#include "Tree.h"
 #include "BinarySearchTree.h"
 
 /*
@@ -125,11 +124,11 @@ BinarySearchTree DeleteBSTree(ElementType X, BinarySearchTree T)
 	}
 	else if (X < T->Element)
 	{
-		DeleteBSTree(X,T->Left); /*Go Left*/
+		T->Left = DeleteBSTree(X,T->Left); /*Go Left*/
 	}
 	else if (X > T->Element)
 	{
-		DeleteBSTree(X,T->Right); /*Go Right*/
+		T->Right = DeleteBSTree(X,T->Right); /*Go Right*/
 	}
 	else                          /*found element X*/
 	{
@@ -137,7 +136,7 @@ BinarySearchTree DeleteBSTree(ElementType X, BinarySearchTree T)
 		{/*double children*/
 			P = FindMinBSTree(T->Right);
 			T->Element = P->Element;
-			DeleteBSTree(P->Element,T->Right);
+			T->Right = DeleteBSTree(P->Element,T->Right);
 
 		}
 		else
