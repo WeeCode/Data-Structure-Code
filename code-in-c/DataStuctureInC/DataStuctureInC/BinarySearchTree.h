@@ -14,6 +14,18 @@
 */
 #pragma once
 
+/*
+	The property that makes a binary tree into a binary search tree is that 
+	for every node, X, in the tree, the values of all the keys in it's left subtree are smaller than the key value in X,
+	and the values of all the keys in it's right subtree are larger than the key value in X.
+
+	           X
+			 /   \
+		  left   right
+		   |       |
+		  < X     > X
+*/
+
 /*BSTree stand for BinarySearchTree,BStreePos stand for BinarySearchTreePostion*/
 #ifndef _BINARYSEARCHTREE_H_
 #define _BINARYSEARCHTREE_H_
