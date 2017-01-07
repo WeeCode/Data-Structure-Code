@@ -30,6 +30,7 @@ and the values of all the keys in it's right subtree are larger than the key val
    < X     > X
 */
 
+/*Make binary search tree Empty,mainly used for initialization*/
 BinarySearchTree MakeBSTreeEmpty(BinarySearchTree T)
 {
 	if (T!=NULL)
@@ -41,6 +42,7 @@ BinarySearchTree MakeBSTreeEmpty(BinarySearchTree T)
 	return NULL;
 }
 
+/*Find element in binary search tree,return NULL if not found*/
 BStreePos FindBSTree(ElementType X, BinarySearchTree T)
 {
 	if (T == NULL)
@@ -54,7 +56,8 @@ BStreePos FindBSTree(ElementType X, BinarySearchTree T)
 		return T;
 }
 
-/*Recursive implementation*/
+/*return the position of the smallest element in the binary search tree,return NULL if empty*/
+/*Recursive implementation:*/
 BStreePos FindMinBSTree(BinarySearchTree T)
 {
 	if (T == NULL)
@@ -65,7 +68,8 @@ BStreePos FindMinBSTree(BinarySearchTree T)
 		return FindMinBSTree(T->Left);
 }
 
-/*Nonrecursive implementation*/
+/*return the position of the largest element in the binary search tree,return NULL if empty*/
+/*Nonrecursive implementation:*/
 BStreePos FindMaxBSTree(BinarySearchTree T)
 {
 	if (T != NULL)
@@ -77,6 +81,7 @@ BStreePos FindMaxBSTree(BinarySearchTree T)
 	return T;
 }
 
+/*Insert element X to T, if X was existed, do nothing*/
 BinarySearchTree InsertBSTree(ElementType X, BinarySearchTree T)
 {
 	if ( T == NULL)
@@ -107,6 +112,9 @@ BinarySearchTree InsertBSTree(ElementType X, BinarySearchTree T)
 	return T; /*this line is important!*/
 }
 
+/*Delete element X in T,
+	if node of X has two childern,replace it with smallest data of the right subtree,
+		then delete the smallest data of the right subtree*/
 BinarySearchTree DeleteBSTree(ElementType X, BinarySearchTree T)
 {
 	BStreePos P;
@@ -146,6 +154,7 @@ BinarySearchTree DeleteBSTree(ElementType X, BinarySearchTree T)
 	return T;
 }
 
+/*Return the Element of P,if P is illegal,release an error and return 0*/
 ElementType RetrieveBSTree(BStreePos P)
 {
 	if (P != NULL)
