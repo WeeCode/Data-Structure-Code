@@ -17,36 +17,179 @@
 #include <stdlib.h>
 #include "AVLTree.h"
 
+#define Max(a,b)  a>b?a:b
+
 /*Make AVL binary search tree Empty,mainly used for initialization*/
 AvlTree MakeAvlTreeEmpty(AvlTree T)
 {
-	return AvlTree();
+	if (T != NULL)
+	{
+		MakeAvlTreeEmpty(T->Left);
+		MakeAvlTreeEmpty(T->Right);
+		free(T);
+	}
+	return NULL;
 }
 
 /*Find element in AVL binary search tree,return NULL if not found*/
 AvlPos FindAvlTree(ElementType X, AvlTree T)
 {
-	return AvlPos();
+	if (T == NULL)
+	{
+		return NULL;
+	}
+	else if (X < T->Element)
+	{
+		return FindAvlTree(X,T->Left);
+	}
+	else if (X > T->Element)
+	{
+		return FindAvlTree(X, T->Right);
+	}
+	else
+	{
+		return T;
+	}
 }
 
 /*return the position of the smallest element in the AVL binary search tree,return NULL if empty*/
 /*Recursive implementation:*/
 AvlPos FindMinAvlTree(AvlTree T)
 {
-	return AvlPos();
+	if (T == NULL)
+	{
+		return NULL;
+	}
+
+	if (T->Left != NULL)
+	{
+		return FindMinAvlTree(T->Left);
+	}
+	else
+	{
+		return T;
+	}
 }
 
 /*return the position of the largest element in the AVL binary search tree,return NULL if empty*/
 /*Nonrecursive implementation:*/
 AvlPos FindMaxAvlTree(AvlTree T)
 {
-	return AvlPos();
+	if (T != NULL)
+	{
+		while (T->Right != NULL)
+		{
+			T = T->Right;
+		}
+	}
+
+	return T;
 }
 
 /*Insert element X to T, if X was existed, do nothing*/
 AvlTree InsertAvlTree(ElementType X, AvlTree T)
 {
-	return AvlTree();
+	if ( T == NULL)
+	{
+		T = (AvlTree)malloc(sizeof(struct AvlNode));
+		if (T == NULL)
+		{
+			perror("InsertAvlTree error: malloc() out of space!\n");
+		}
+		else
+		{
+			T->Element = X;
+			T->Height = 0;
+			T->Left = NULL;
+			T->Right = NULL;
+		}
+	}
+	else if (X < T->Element)
+	{
+		T->Left = InsertAvlTree(X,T->Left);
+		if ((HeightAvlTree(T->Left) - HeightAvlTree(T->Right)) == 2)
+		{
+			if (X < T->Left->Element)
+			{
+				T = SingleRotateWithLeft(T); /*case 1: left-left*/
+			}
+			else
+			{
+				T = DoubleRotateWithLeft(T); /*case 2: left-right*/
+			}
+		}
+	}
+	else if (X > T->Element)
+	{
+		T->Right = InsertAvlTree(X,T->Right);
+		if ((HeightAvlTree(T->Right) - HeightAvlTree(T->Left)) == 2)
+		{
+			if (X > T->Right->Element)
+			{
+				T = SingleRotateWithRight(T); /*case 3: right-right*/
+			}
+			else
+			{
+				T = DoubleRotateWithRight(T); /*case 4: right-left*/
+			}
+		}
+	}
+	/*else if (X == T->Element),we will do nothing*/
+
+	T->Height = Max(HeightAvlTree(T->Left),HeightAvlTree(T->Right)) + 1;
+	return T;
+}
+
+AvlPos SingleRotateWithLeft(AvlPos P)
+{
+	AvlPos newRoot;
+
+	newRoot = P->Left;
+	P->Left = newRoot->Right;
+	newRoot->Right = P;
+
+	P->Height = Max(HeightAvlTree(P->Left), HeightAvlTree(P->Right)) + 1;
+	newRoot->Height = Max(HeightAvlTree(newRoot->Left), P->Height) + 1;
+
+	return newRoot;
+}
+
+/*  case 2: left-right:DoubleRotateWithLeft routine
+
+				K3					K2
+			  /    \			  /    \
+			 K1			 ==>	 K1	   K3
+		   /   \
+			   K2
+*/
+AvlPos DoubleRotateWithLeft(AvlPos P)
+{
+	/*Rotate between K1 and K2*/
+	P->Left = SingleRotateWithRight(P->Left);
+
+	/*Rotate between K3 and K1*/
+	return SingleRotateWithLeft(P);
+}
+
+AvlPos SingleRotateWithRight(AvlPos P)
+{
+	AvlPos newRoot;
+
+	newRoot = P->Right;
+	P->Right = newRoot->Left;
+	newRoot->Left = P;
+
+	P->Height = Max(HeightAvlTree(P->Left), HeightAvlTree(P->Right)) + 1;
+	newRoot->Height = Max(P->Height,HeightAvlTree(newRoot->Right)) + 1;
+
+	return newRoot;
+}
+
+AvlPos DoubleRotateWithRight(AvlPos P)
+{
+	P->Right = SingleRotateWithLeft(P->Right);
+
+	return SingleRotateWithRight(P);
 }
 
 /*Delete element X in T,
@@ -60,5 +203,28 @@ AvlTree DeleteAvlTree(ElementType X, AvlTree T)
 /*Return the Element of P,if P is illegal,release an error and return 0*/
 ElementType RetrieveAvlTree(AvlPos P)
 {
-	return ElementType();
+	if (P != NULL)
+	{
+		return P->Element;
+		
+	}
+	else
+	{
+		perror("RetrieveBSTree error: illegal BStreePos!\n");
+		return 0;
+	}
+}
+
+/*Return the Height of P,if P is illegal,release an error and return -1*/
+int HeightAvlTree(AvlPos P)
+{
+	if (P != NULL)
+	{
+		return P->Height;
+	}
+	else
+	{
+		perror("HeightAvlTree error: illegal BStreePos!\n");
+		return -1;
+	}
 }

@@ -113,6 +113,10 @@ extern	AvlPos FindMaxAvlTree(AvlTree T);
 //			  
 ////////////////////////////////////////////////////////////////////////////
 extern	AvlTree InsertAvlTree(ElementType X, AvlTree T);
+static  AvlPos SingleRotateWithLeft(AvlPos P);
+static  AvlPos DoubleRotateWithLeft(AvlPos P);
+static  AvlPos SingleRotateWithRight(AvlPos P);
+static  AvlPos DoubleRotateWithRight(AvlPos P);
 
 /////////////////////////////////////////////////////////////////////////////
 // 
@@ -151,5 +155,24 @@ extern	AvlTree DeleteAvlTree(ElementType X, AvlTree T);
 //			  
 ////////////////////////////////////////////////////////////////////////////
 extern	ElementType RetrieveAvlTree(AvlPos P);
+
+/////////////////////////////////////////////////////////////////////////////
+// 
+//    static int HeightAvlTree(AvlPos P)
+// 
+//    功能：
+//            获取AVL二叉查找树中节点P的高度
+// 
+//    参数：
+//			  P: AVL二叉查找树中节点P 
+//			  
+//    描述：
+//			  调用时应保证P合法
+//
+//    返回：
+//			  节点P的高度
+//			  
+////////////////////////////////////////////////////////////////////////////
+static int HeightAvlTree(AvlPos P);
 
 #endif // !_AVLTREE_H_
