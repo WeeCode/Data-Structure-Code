@@ -16,3 +16,38 @@
 #include "stdafx.h"
 #include <stdlib.h>
 #include "AVLTree.h"
+
+AvlTree MakeAvlTreeEmpty(AvlTree T)
+{
+	return AvlTree();
+}
+
+AvlPos FindAvlTree(ElementType X, AvlTree T)
+{
+	return AvlPos();
+}
+
+AvlPos FindMinAvlTree(AvlTree T)
+{
+	return AvlPos();
+}
+
+AvlPos FindMaxAvlTree(AvlTree T)
+{
+	return AvlPos();
+}
+
+AvlTree InsertAvlTree(ElementType X, AvlTree T)
+{
+	return AvlTree();
+}
+
+AvlTree DeleteAvlTree(ElementType X, AvlTree T)
+{
+	return AvlTree();
+}
+
+ElementType RetrieveAvlTree(AvlPos P)
+{
+	return ElementType();
+}
