@@ -140,6 +140,14 @@ AvlTree InsertAvlTree(ElementType X, AvlTree T)
 	return T;
 }
 
+/*case 1: left-left £ºSingleRotateWithLeft routine
+
+				K2						K1
+			   /  \					  /	   \
+			  K1  _Z_     ==>		_X_	   K2
+			/   \						 /    \
+		  _X_   _Y_					   _Y_   _Z_
+*/
 AvlPos SingleRotateWithLeft(AvlPos P)
 {
 	AvlPos newRoot;
@@ -171,6 +179,7 @@ AvlPos DoubleRotateWithLeft(AvlPos P)
 	return SingleRotateWithLeft(P);
 }
 
+/*case 3: right-right: SingleRotateWithRight*/
 AvlPos SingleRotateWithRight(AvlPos P)
 {
 	AvlPos newRoot;
@@ -185,6 +194,7 @@ AvlPos SingleRotateWithRight(AvlPos P)
 	return newRoot;
 }
 
+/*case 4: right-left; DoubleRotateWithRight*/
 AvlPos DoubleRotateWithRight(AvlPos P)
 {
 	P->Right = SingleRotateWithLeft(P->Right);
@@ -197,7 +207,43 @@ AvlPos DoubleRotateWithRight(AvlPos P)
 		then delete the smallest data of the right subtree*/
 AvlTree DeleteAvlTree(ElementType X, AvlTree T)
 {
-	return AvlTree();
+	if (T == NULL)
+	{
+		perror("DeleteAvlTree error: delete in empty AVL tree!\n");
+		return NULL;
+	}
+	else if (X < T->Element)
+	{
+		T->Left = DeleteAvlTree(X,T->Left);
+	}
+	else if (X > T->Element)
+	{
+		T->Right = DeleteAvlTree(X,T->Right);
+	}
+	else
+	{
+		if (T->Left || T->Right)
+		{
+			if (HeightAvlTree(T->Right) > HeightAvlTree(T->Left))
+			{
+				T->Element = T->Right->Element;
+				T->Right = DeleteAvlTree(T->Element, T->Right);
+			}
+			else
+			{
+				T->Element = T->Left->Element;
+				T->Left = DeleteAvlTree(T->Element, T->Left);
+			}
+		}
+		else
+		{
+			free(T);
+			T = NULL;
+		}
+	}
+
+	T->Height = Max(HeightAvlTree(T->Left), HeightAvlTree(T->Right)) + 1;
+	return T;
 }
 
 /*Return the Element of P,if P is illegal,release an error and return 0*/
@@ -224,7 +270,6 @@ int HeightAvlTree(AvlPos P)
 	}
 	else
 	{
-		perror("HeightAvlTree error: illegal BStreePos!\n");
 		return -1;
 	}
 }
