@@ -38,5 +38,16 @@ struct BinaryTreeNode
 	BinaryTree Right;
 };
 
+/*AVL tree node, Applicable to binary tree*/
+typedef struct AvlNode *PtrToAvlNode;
+typedef struct AvlNode *AvlTree;
+struct AvlNode
+{
+	ElementType Element;
+	AvlTree Left;
+	AvlTree Right;
+	int Height;
+};
+
 #endif
 
