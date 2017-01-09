@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include "AVLTree.h"
 
-#define Max(a,b)  a>b?a:b
+#define Max(a,b)    (((a) > (b)) ? (a) : (b))       //最大值函数
 
 /*Make AVL binary search tree Empty,mainly used for initialization*/
 AvlTree MakeAvlTreeEmpty(AvlTree T)
@@ -207,6 +207,7 @@ AvlPos DoubleRotateWithRight(AvlPos P)
 		then delete the smallest data of the right subtree*/
 AvlTree DeleteAvlTree(ElementType X, AvlTree T)
 {
+	AvlPos P;
 	if (T == NULL)
 	{
 		perror("DeleteAvlTree error: delete in empty AVL tree!\n");
@@ -224,14 +225,16 @@ AvlTree DeleteAvlTree(ElementType X, AvlTree T)
 	{
 		if (T->Left || T->Right)
 		{
-			if (HeightAvlTree(T->Right) > HeightAvlTree(T->Left))
+			if (HeightAvlTree(T->Right) >= HeightAvlTree(T->Left))
 			{
-				T->Element = T->Right->Element;
+				P = FindMinAvlTree(T->Right);
+				T->Element = RetrieveAvlTree(P);
 				T->Right = DeleteAvlTree(T->Element, T->Right);
 			}
 			else
 			{
-				T->Element = T->Left->Element;
+				P = FindMaxAvlTree(T->Left);
+				T->Element = P->Element;
 				T->Left = DeleteAvlTree(T->Element, T->Left);
 			}
 		}
@@ -242,7 +245,47 @@ AvlTree DeleteAvlTree(ElementType X, AvlTree T)
 		}
 	}
 
-	T->Height = Max(HeightAvlTree(T->Left), HeightAvlTree(T->Right)) + 1;
+	if (T != NULL)
+	{
+		T = DeleteRotateFix(T);
+		T->Height = Max(HeightAvlTree(T->Left), HeightAvlTree(T->Right)) + 1;
+	}
+	
+	return T;
+}
+
+/*Recursive check whether node need rotate after delete operation*/
+AvlTree DeleteRotateFix(AvlTree T)
+{
+	int leftHeight, rightHeight;
+
+	leftHeight = HeightAvlTree(T->Left);
+	rightHeight = HeightAvlTree(T->Right);
+
+	if ( (leftHeight - rightHeight) == 2)
+	{
+		if (HeightAvlTree(T->Left->Left) >= HeightAvlTree(T->Left->Right))
+		{
+			T = SingleRotateWithLeft(T); /*case 1: left-left*/
+		}
+		else
+		{
+			T = DoubleRotateWithLeft(T); /*case 2: left-right*/
+		}
+	}
+	else if ((rightHeight - leftHeight) == 2)
+	{
+		if (HeightAvlTree(T->Right->Right) >= HeightAvlTree(T->Right->Left))
+		{
+			T = SingleRotateWithRight(T); /*case 3: right-right*/
+		}
+		else
+		{
+			T = DoubleRotateWithRight(T); /*case 4: right-left*/
+		}
+	}
+	/*else don't need rotate,we will do nothing*/
+	
 	return T;
 }
 
