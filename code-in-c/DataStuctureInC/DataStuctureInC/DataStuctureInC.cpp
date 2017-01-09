@@ -9,6 +9,7 @@
 #include "StackADT.h"
 #include "QueueADT.h"
 #include "BinarySearchTree.h"
+#include "AVLTree.h"
 
 static int Test_List(void);
 static int test_RadixSort(void);
@@ -16,10 +17,11 @@ static int test_Stack(void);
 static int test_Postfix(void);
 static int test_Queue(void);
 static int test_BinarySearchTree(void);
+static int test_AVLTree(void);
 
 int main()
 {
-	test_BinarySearchTree();
+	test_AVLTree();
 
     return 0;
 }
@@ -191,6 +193,57 @@ int test_BinarySearchTree(void)
 
 	T = MakeBSTreeEmpty(T);
 
+
+	return 0;
+}
+
+int test_AVLTree(void)
+{
+	AvlTree T = NULL;
+	AvlPos P;
+
+	T = MakeAvlTreeEmpty(T);
+
+	T = InsertAvlTree(3, T);
+	T = InsertAvlTree(2, T);
+	T = InsertAvlTree(1, T);/*case 1: left-left*/
+
+	T = InsertAvlTree(4, T);
+	T = InsertAvlTree(5, T);/*case 3: right-right*/
+	T = InsertAvlTree(6, T);/*case 3: right-right, in root*/
+	T = InsertAvlTree(7, T);/*case 3: right-right*/
+
+	T = InsertAvlTree(16, T);
+	T = InsertAvlTree(15, T);/*case 4: right-left*/
+	T = InsertAvlTree(14, T);/*case 4: right-left*/
+	T = InsertAvlTree(13, T);/*case 3: right-right*/
+	T = InsertAvlTree(12, T);/*case 1: left-left*/
+	T = InsertAvlTree(11, T);/*case 1: left-left*/
+	T = InsertAvlTree(10, T);/*case 1: left-left*/
+
+	T = InsertAvlTree(8, T);
+	T = InsertAvlTree(9, T);/*case 2: left-right*/
+
+	printf("the bigest element in T is :%d \n", FindMaxAvlTree(T)->Element);
+	printf("the smallest element in T is :%d \n", FindMinAvlTree(T)->Element);
+
+	P = FindAvlTree(7, T);
+	printf("find element %d in T \n", RetrieveAvlTree(P));
+
+	T = DeleteAvlTree(7, T);
+	P = FindAvlTree(7, T);
+	printf("find element %d in T \n", RetrieveAvlTree(P));
+
+	T = DeleteAvlTree(13, T);
+
+	T = DeleteAvlTree(15, T);
+	T = DeleteAvlTree(16, T);
+	T = DeleteAvlTree(14, T);
+
+	T = DeleteAvlTree(6, T);
+	T = DeleteAvlTree(5, T);
+
+	T = MakeAvlTreeEmpty(T);
 
 	return 0;
 }
