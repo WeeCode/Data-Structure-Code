@@ -16,3 +16,40 @@
 #include "stdafx.h"
 #include <stdlib.h>
 #include "HashSeparateChain.h"
+
+struct HashTable_SepChain
+{
+	int TableSize;
+	List *TheLists;
+};
+
+HashTable InitialHashTable(int tableSize)
+{
+	return HashTable();
+}
+
+void MakeEmptyHashTable(HashTable H)
+{
+}
+
+void DestoryHashTable(HashTable H)
+{
+}
+
+Position FindHashTable(ElementType Key, HashTable H)
+{
+	return Position();
+}
+
+void InsertHashTable(ElementType Key, HashTable H)
+{
+}
+
+void DeleteHashTable(ElementType Key, HashTable H)
+{
+}
+
+ElementType RetrieveHashTable(Position P)
+{
+	return ElementType();
+}

@@ -13,3 +13,20 @@
 * 说    明：分离链接法实现散列
 */
 #pragma once
+#include "ListADT.h"
+
+#ifndef _HASHSEPARATECHAIN_H_
+#define _HASHSEPARATECHAIN_H_
+
+struct HashTable_SepChain;
+typedef struct HashTable_SepChain *HashTable;
+
+extern HashTable InitialHashTable(int tableSize);
+extern void MakeEmptyHashTable(HashTable H);
+extern void DestoryHashTable(HashTable H);
+extern Position FindHashTable(ElementType Key, HashTable H);
+extern void InsertHashTable(ElementType Key, HashTable H);
+extern void DeleteHashTable(ElementType Key, HashTable H);
+extern ElementType RetrieveHashTable(Position P);
+
+#endif // !_HASHSEPARATECHAIN_H_
