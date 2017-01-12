@@ -20,12 +20,14 @@
 
 struct HashTable_SepChain;
 typedef struct HashTable_SepChain *HashTable;
+typedef unsigned int Index;
 
 extern HashTable InitialHashTable(int tableSize);
 extern void MakeEmptyHashTable(HashTable H);
 extern void DestoryHashTable(HashTable H);
 extern Position FindHashTable(ElementType Key, HashTable H);
 extern void InsertHashTable(ElementType Key, HashTable H);
+static Index Hash(ElementType Key,HashTable H);
 extern void DeleteHashTable(ElementType Key, HashTable H);
 extern ElementType RetrieveHashTable(Position P);
 
