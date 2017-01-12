@@ -23,7 +23,8 @@ struct HashTable_SepChain
 	int TableSize;
 	List *TheLists;
 };
-  
+ 
+/*Initilize HashTable with settled table size,return NULL if failed*/
 HashTable InitialHashTable(int tableSize)
 {
 	HashTable H;
@@ -57,6 +58,7 @@ HashTable InitialHashTable(int tableSize)
 	return H;
 }
 
+/*Make HashTable empty, reserved list heads,release node's memory*/
 void MakeEmptyHashTable(HashTable H)
 {
 	int i;
@@ -75,6 +77,7 @@ void MakeEmptyHashTable(HashTable H)
 	}
 }
 
+/*Destory HashTable entire,release whole memory*/
 void DestoryHashTable(HashTable H)
 {
 	int i;
@@ -94,6 +97,7 @@ void DestoryHashTable(HashTable H)
 	}
 }
 
+/*Find Key in HashTable,return it's Position in corresponding List,return NULL if Key do not exist in table*/
 Position FindHashTable(ElementType Key, HashTable H)
 {
 	List L;
@@ -111,6 +115,7 @@ Position FindHashTable(ElementType Key, HashTable H)
 	}
 }
 
+/*Insert Key to Hashtable,do nothing if Key is already exist in table*/
 void InsertHashTable(ElementType Key, HashTable H)
 {
 	Position Pos;
@@ -129,6 +134,7 @@ void InsertHashTable(ElementType Key, HashTable H)
 	}
 }
 
+/*Hash function*/
 Index Hash(ElementType Key, HashTable H)
 {
 	if (H != NULL)
@@ -143,6 +149,7 @@ Index Hash(ElementType Key, HashTable H)
 	
 }
 
+/*Delete Key in Hashtable,do nothing if Key is not exist in table*/
 void DeleteHashTable(ElementType Key, HashTable H)
 {
 	Position Pos;
@@ -161,6 +168,7 @@ void DeleteHashTable(ElementType Key, HashTable H)
 	}
 }
 
+/*Get Key value in Position,assume Position P is legal*/
 ElementType RetrieveHashTable(Position P)
 {
 	if (P == NULL)
