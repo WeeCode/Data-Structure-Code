@@ -25,20 +25,20 @@ struct HashTable_SepChain
 };
  
 /*Initilize HashTable with settled table size,return NULL if failed*/
-HashTable InitialHashTable(int tableSize)
+HashTable InitializeHashTable(int tableSize)
 {
 	HashTable H;
 	int i;
 
 	if (tableSize < MinTableSize)
 	{
-		perror("InitialHashTable error: table size too small!\n");
+		perror("InitializeHashTable error: table size too small!\n");
 	}
 
 	H = (HashTable)malloc(sizeof(struct HashTable_SepChain));
 	if (H == NULL)
 	{
-		perror("InitialHashTable error: malloc() out of space!\n");
+		perror("InitializeHashTable error: malloc() out of space!\n");
 		return NULL;
 	}
 	/*init hashTable*/
@@ -46,7 +46,7 @@ HashTable InitialHashTable(int tableSize)
 	H->TheLists = (List*)malloc(H->TableSize*sizeof(List));
 	if (H->TheLists == NULL)
 	{
-		perror("InitialHashTable error: malloc() out of space!\n");
+		perror("InitializeHashTable error: malloc() out of space!\n");
 		return NULL;
 	}
 	/*init list*/

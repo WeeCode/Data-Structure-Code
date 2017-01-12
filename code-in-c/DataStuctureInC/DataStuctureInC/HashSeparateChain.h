@@ -24,7 +24,7 @@ typedef unsigned int Index;
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-//    extern HashTable InitialHashTable(int tableSize)
+//    extern HashTable InitializeHashTable(int tableSize)
 // 
 //    功能：
 //            哈希表初始化（分离链接法实现）
@@ -39,7 +39,7 @@ typedef unsigned int Index;
 //			  初始化完成的哈希表
 //			  
 ////////////////////////////////////////////////////////////////////////////
-extern HashTable InitialHashTable(int tableSize);
+extern HashTable InitializeHashTable(int tableSize);
 
 /////////////////////////////////////////////////////////////////////////////
 // 
