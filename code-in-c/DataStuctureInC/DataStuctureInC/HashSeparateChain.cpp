@@ -163,5 +163,14 @@ void DeleteHashTable(ElementType Key, HashTable H)
 
 ElementType RetrieveHashTable(Position P)
 {
-	return Retrieve(P);
+	if (P == NULL)
+	{
+		perror("RetrieveHashTable error: NULL Position!\n");
+		return 0;
+	}
+	else
+	{
+		return Retrieve(P);
+	}
+	
 }

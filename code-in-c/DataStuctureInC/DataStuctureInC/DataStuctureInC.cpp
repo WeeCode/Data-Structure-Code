@@ -10,6 +10,7 @@
 #include "QueueADT.h"
 #include "BinarySearchTree.h"
 #include "AVLTree.h"
+#include "HashSeparateChain.h"
 
 static int Test_List(void);
 static int test_RadixSort(void);
@@ -18,10 +19,11 @@ static int test_Postfix(void);
 static int test_Queue(void);
 static int test_BinarySearchTree(void);
 static int test_AVLTree(void);
+static int test_HashSeparateChain(void);
 
 int main()
 {
-	test_AVLTree();
+	test_HashSeparateChain();
 
     return 0;
 }
@@ -244,6 +246,31 @@ int test_AVLTree(void)
 	T = DeleteAvlTree(5, T);
 
 	T = MakeAvlTreeEmpty(T);
+
+	return 0;
+}
+
+int	test_HashSeparateChain(void)
+{
+	HashTable H;
+	Position P;
+	int i;
+
+	H = InitialHashTable(10);
+
+	for ( i = 0; i < 20; i++)
+	{
+		InsertHashTable((ElementType)i,H);
+	}
+
+	P = FindHashTable(5,H);
+	printf("find element %d in T \n", RetrieveHashTable(P));
+	DeleteHashTable(5,H);
+	P = FindHashTable(5, H);
+	printf("find element %d in T \n", RetrieveHashTable(P));
+
+	MakeEmptyHashTable(H);
+	DestoryHashTable(H);
 
 	return 0;
 }
