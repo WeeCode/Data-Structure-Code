@@ -22,10 +22,11 @@ static int test_BinarySearchTree(void);
 static int test_AVLTree(void);
 static int test_HashSeparateChain(void);
 static int test_NextPrime(void);
+static int test_HashOpenAddress(void);
 
 int main()
 {
-	test_NextPrime();
+	test_HashOpenAddress();
 
     return 0;
 }
@@ -299,4 +300,29 @@ int test_NextPrime(void)
 
 	return 0;
 
+}
+
+int test_HashOpenAddress(void)
+{
+	HashTbl H;
+	HashTblPosition P;
+
+	H = InitializeHashTbl(20);
+	
+	InsertHashTbl((ElementType)1, H);
+	InsertHashTbl((ElementType)(23+1), H);
+	InsertHashTbl((ElementType)(2*23+1), H);
+
+	InsertHashTbl((ElementType)2, H);
+
+	P = FindHashTbl((23 + 1),H);
+	printf("find element %d in T \n", RetrieveHashTbl(P,H));
+	DeleteHashTbl((23 + 1),H);
+	P = FindHashTbl((23 + 1), H);
+	printf("find element %d in T \n", RetrieveHashTbl(P, H));
+
+	MakeEmptyHashTbl(H);
+	DestoryHashTbl(H);
+
+	return 0;
 }

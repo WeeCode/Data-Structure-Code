@@ -141,10 +141,7 @@ void DestoryHashTbl(HashTbl H)
 	int i;
 	if (H != NULL)
 	{
-		for (i = 0; i < H->TableSize; i++)
-		{
-			free(H->TheCells);
-		}
+		free(H->TheCells);
 		free(H);
 	}
 	
@@ -156,12 +153,12 @@ HashTblPosition FindHashTbl(ElementType Key, HashTbl H)
 	int CollisionNum = 0;
 
 	CurrentPos = Hash(Key,H);
-	while (H->TheCells[CurrentPos].Info != Empty || H->TheCells[CurrentPos].Element != Key)
+	while (H->TheCells[CurrentPos].Info != Empty && H->TheCells[CurrentPos].Element != Key)
 	{
 		CurrentPos += 2*(++CollisionNum) - 1; // i^2 =(i-1)^2 + 2i -1 
 
 		/*put back if location is past the array*/
-		if (CurrentPos >= (unsigned int)H->TableSize)
+		while (CurrentPos >= (unsigned int)H->TableSize)
 		{
 			CurrentPos -= H->TableSize;
 		}
@@ -204,7 +201,16 @@ void DeleteHashTbl(ElementType Key, HashTbl H)
 
 ElementType RetrieveHashTbl(HashTblPosition P, HashTbl H)
 {
-	return H->TheCells[P].Element;
+	if (H->TheCells[P].Info == Legitimate)
+	{
+		return H->TheCells[P].Element;
+	}
+	else
+	{
+		perror("RetrieveHashTbl warning: Info is empty or deleted!\n");
+		return 0;
+	}
+	
 }
 
 HashTbl ReHashTbl(HashTbl H)
