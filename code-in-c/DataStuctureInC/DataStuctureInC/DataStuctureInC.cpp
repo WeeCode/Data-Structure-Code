@@ -256,7 +256,7 @@ int	test_HashSeparateChain(void)
 	Position P;
 	int i;
 
-	H = InitialHashTable(10);
+	H = InitializeHashTable(10);
 
 	for ( i = 0; i < 20; i++)
 	{

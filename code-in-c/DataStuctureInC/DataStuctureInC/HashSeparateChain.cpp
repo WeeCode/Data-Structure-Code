@@ -33,6 +33,7 @@ HashTable InitializeHashTable(int tableSize)
 	if (tableSize < MinTableSize)
 	{
 		perror("InitializeHashTable error: table size too small!\n");
+		return NULL;
 	}
 
 	H = (HashTable)malloc(sizeof(struct HashTable_SepChain));
