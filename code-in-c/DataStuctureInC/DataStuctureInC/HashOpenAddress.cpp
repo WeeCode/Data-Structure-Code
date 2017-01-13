@@ -142,7 +142,6 @@ void MakeEmptyHashTbl(HashTbl H)
 /*Destory HashTable entire,release whole memory*/
 void DestoryHashTbl(HashTbl H)
 {
-	int i;
 	if (H != NULL)
 	{
 		free(H->TheCells);

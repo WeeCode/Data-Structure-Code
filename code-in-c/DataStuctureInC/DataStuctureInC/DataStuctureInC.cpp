@@ -12,6 +12,7 @@
 #include "AVLTree.h"
 #include "HashSeparateChain.h"
 #include "HashOpenAddress.h"
+#include "BinaryHeap.h"
 
 static int Test_List(void);
 static int test_RadixSort(void);
@@ -23,10 +24,11 @@ static int test_AVLTree(void);
 static int test_HashSeparateChain(void);
 static int test_NextPrime(void);
 static int test_HashOpenAddress(void);
+static int test_BinaryHeap(void);
 
 int main()
 {
-	test_HashOpenAddress();
+	test_BinaryHeap();
 
     return 0;
 }
@@ -325,4 +327,38 @@ int test_HashOpenAddress(void)
 	DestoryHashTbl(H);
 
 	return 0;
+}
+
+int test_BinaryHeap(void)
+{
+	PriorityQueue PriQ;
+
+	PriQ = InitPriQueue(5);
+
+	printf("Is IsEmptyPriQueue empty? %d\n", IsEmptyPriQueue(PriQ));
+
+	InsertPriQueue(5, PriQ);
+	InsertPriQueue(4, PriQ);
+	InsertPriQueue(1, PriQ);
+	InsertPriQueue(10, PriQ);
+	InsertPriQueue(3, PriQ);
+	InsertPriQueue(2, PriQ);
+
+	printf("Is IsFullPriQueue empty? %d\n", IsFullPriQueue(PriQ));
+
+	printf("FindMinPriQueue is: %d  \n", FindMinPriQueue(PriQ));
+
+	printf("DeletMinPriQueue is: %d  \n", DeletMinPriQueue(PriQ));
+	printf("DeletMinPriQueue is: %d  \n", DeletMinPriQueue(PriQ));
+	printf("DeletMinPriQueue is: %d  \n", DeletMinPriQueue(PriQ));
+	printf("DeletMinPriQueue is: %d  \n", DeletMinPriQueue(PriQ));
+	printf("DeletMinPriQueue is: %d  \n", DeletMinPriQueue(PriQ));
+	printf("DeletMinPriQueue is: %d  \n", DeletMinPriQueue(PriQ));
+
+	MakeEmptyPriQueue(PriQ);
+
+	DestoryPriQueue(PriQ);
+
+	return 0;
+	
 }

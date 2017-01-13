@@ -46,13 +46,13 @@ PriorityQueue InitPriQueue(int maxElements)
 
 	PriQ->Capacity = maxElements;
 	PriQ->Size = 0;
-	PriQ->Elements = (ElementType*)malloc(PriQ->Capacity*sizeof(ElementType));
+	PriQ->Elements = (ElementType*)malloc((PriQ->Capacity + 1)*sizeof(ElementType));
 	if (PriQ->Elements == NULL)
 	{
 		perror("InitPriQueue error: malloc() out of space!\n");
 		return NULL;
 	}
-	PriQ->Elements[0] = MinElement;
+	PriQ->Elements[0] = MinElement; /*sentia*/
 
 	return PriQ;
 
@@ -92,6 +92,7 @@ void InsertPriQueue(ElementType X, PriorityQueue PriQ)
 	else if (IsEmptyPriQueue(PriQ))
 	{
 		PriQ->Elements[1] = X;
+		PriQ->Size++;
 	}
 	else
 	{
@@ -102,6 +103,8 @@ void InsertPriQueue(ElementType X, PriorityQueue PriQ)
 
 		PriQ->Elements[tmpPos] = X;
 	}
+
+	
 }
 
 ElementType DeletMinPriQueue(PriorityQueue PriQ)
