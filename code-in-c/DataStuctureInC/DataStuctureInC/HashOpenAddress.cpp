@@ -43,6 +43,7 @@ struct HashTbl_OpenAddress
 	Cell *TheCells;
 };
 
+/*Initilize HashTable with settled table size,return NULL if failed*/
 HashTbl InitializeHashTbl(int tableSize)
 {
 	HashTbl H;
@@ -79,6 +80,7 @@ HashTbl InitializeHashTbl(int tableSize)
 	return H;
 }
 
+/*Get next prime after limit*/
 int NextPrime(unsigned int limit)
 {
 	bool IsPrime;
@@ -124,6 +126,7 @@ int NextPrime(unsigned int limit)
 	}
 }
 
+/*Make HashTable empty, Mark all cell as empty state*/
 void MakeEmptyHashTbl(HashTbl H)
 {
 	int i;
@@ -136,6 +139,7 @@ void MakeEmptyHashTbl(HashTbl H)
 	}
 }
 
+/*Destory HashTable entire,release whole memory*/
 void DestoryHashTbl(HashTbl H)
 {
 	int i;
@@ -147,6 +151,7 @@ void DestoryHashTbl(HashTbl H)
 	
 }
 
+/*Find Key in HashTable,return it's Position ,return an empty cell if Key do not exist in table*/
 HashTblPosition FindHashTbl(ElementType Key, HashTbl H)
 {
 	HashTblPosition CurrentPos;
@@ -168,6 +173,7 @@ HashTblPosition FindHashTbl(ElementType Key, HashTbl H)
 
 }
 
+/*Insert Key to Hashtable,do nothing if Key is already exist in table*/
 void InsertHashTbl(ElementType Key, HashTbl H)
 {
 	HashTblPosition P;
@@ -182,11 +188,13 @@ void InsertHashTbl(ElementType Key, HashTbl H)
 	/*else Key is already existed,do noting*/
 }
 
+/*Hash function*/
 Index Hash(ElementType Key, HashTbl H)
 {
 	return Key % H->TableSize;
 }
 
+/*Delete Key in Hashtable,do nothing if Key is not exist in table*/
 void DeleteHashTbl(ElementType Key, HashTbl H)
 {
 	HashTblPosition P;
@@ -199,6 +207,7 @@ void DeleteHashTbl(ElementType Key, HashTbl H)
 	}
 }
 
+/*Get Key value in Position,return 0 and release a warning if Position is not Legitimate state*/
 ElementType RetrieveHashTbl(HashTblPosition P, HashTbl H)
 {
 	if (H->TheCells[P].Info == Legitimate)

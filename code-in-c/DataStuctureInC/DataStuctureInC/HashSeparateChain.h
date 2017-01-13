@@ -120,7 +120,7 @@ static Index Hash(ElementType Key,HashTable H);
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-//    extern void InsertHashTable(ElementType Key, HashTable H)
+//    extern void DeleteHashTable(ElementType Key, HashTable H)
 // 
 //    功能：
 //            在哈希表H中删除键值Key
