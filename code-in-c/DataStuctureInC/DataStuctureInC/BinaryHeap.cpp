@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include "BinaryHeap.h"
 
+#define MinElementSize   (3)
+#define MinElement     (-9999)
 /*implementate binary heap by an array*/
 struct BinaryHeap
 {
@@ -27,37 +29,138 @@ struct BinaryHeap
 
 PriorityQueue InitPriQueue(int maxElements)
 {
-	return PriorityQueue();
+	PriorityQueue PriQ;
+
+	if (maxElements< MinElementSize)
+	{
+		perror("InitPriQueue error: maxElements size too small!\n");
+		return NULL;
+	}
+
+	PriQ = (PriorityQueue)malloc(sizeof(struct BinaryHeap));
+	if (PriQ == NULL)
+	{
+		perror("InitPriQueue error: malloc() out of space!\n");
+		return NULL;
+	}
+
+	PriQ->Capacity = maxElements;
+	PriQ->Size = 0;
+	PriQ->Elements = (ElementType*)malloc(PriQ->Capacity*sizeof(ElementType));
+	if (PriQ->Elements == NULL)
+	{
+		perror("InitPriQueue error: malloc() out of space!\n");
+		return NULL;
+	}
+	PriQ->Elements[0] = MinElement;
+
+	return PriQ;
+
 }
 
 void DestoryPriQueue(PriorityQueue PriQ)
 {
+	if (PriQ != NULL)
+	{
+		free(PriQ->Elements);
+		free(PriQ);
+	}
 }
 
 void MakeEmptyPriQueue(PriorityQueue PriQ)
 {
+	if (PriQ != NULL)
+	{
+		PriQ->Size = 0;
+	}
+	else
+	{
+		perror("MakeEmptyPriQueue error: empty PriQueue!\n");
+	}
+	
 }
 
 void InsertPriQueue(ElementType X, PriorityQueue PriQ)
 {
+	int tmpPos;
+
+	if (IsFullPriQueue(PriQ))
+	{
+		perror("InsertPriQueue error: Insert in full PriQueue!\n");
+		return;
+	}
+	else if (IsEmptyPriQueue(PriQ))
+	{
+		PriQ->Elements[1] = X;
+	}
+	else
+	{
+		for ( tmpPos = ++PriQ->Size; X < PriQ->Elements[tmpPos/2]; tmpPos /= 2)
+		{
+			PriQ->Elements[tmpPos] = PriQ->Elements[tmpPos / 2];
+		}
+
+		PriQ->Elements[tmpPos] = X;
+	}
 }
 
 ElementType DeletMinPriQueue(PriorityQueue PriQ)
 {
-	return ElementType();
+	ElementType min,last;
+	int tmpPos,child;
+
+	if (IsEmptyPriQueue(PriQ))
+	{
+		perror("DeletMinPriQueue error: empty PriQueue!\n");
+		return MinElement;
+	}
+
+	min = PriQ->Elements[1];
+	last = PriQ->Elements[PriQ->Size];
+	PriQ->Size--;
+
+	for (tmpPos = 1; 2*tmpPos <= PriQ->Size; tmpPos = child)
+	{
+		/*find smaller child*/
+		child = 2 * tmpPos;
+		if ((child != PriQ->Size) && (PriQ->Elements[child + 1] < PriQ->Elements[child]))
+			child++;
+
+		/*percolate one level*/
+		if (last > PriQ->Elements[child])
+		{
+			PriQ->Elements[tmpPos] = PriQ->Elements[child];
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	PriQ->Elements[tmpPos] = last;
+	
+	return min;
 }
 
 ElementType FindMinPriQueue(PriorityQueue PriQ)
 {
-	return ElementType();
+	if (!IsEmptyPriQueue(PriQ))
+	{
+		return PriQ->Elements[1];
+	}
+	else
+	{
+		perror("FindMinPriQueue error: empty PriQueue!\n");
+		return MinElement;
+	}
 }
 
 int IsEmptyPriQueue(PriorityQueue PriQ)
 {
-	return 0;
+	return PriQ->Size == 0;
 }
 
 int IsFullPriQueue(PriorityQueue PriQ)
 {
-	return 0;
+	return PriQ->Size == PriQ->Capacity;
 }
