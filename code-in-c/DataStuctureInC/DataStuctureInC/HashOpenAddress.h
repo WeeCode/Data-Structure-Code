@@ -158,6 +158,22 @@ extern void DeleteHashTbl(ElementType Key,HashTbl H);
 ////////////////////////////////////////////////////////////////////////////
 extern ElementType RetrieveHashTbl(HashTblPosition P,HashTbl H);
 
-static HashTbl ReHashTbl(HashTbl H);
+/////////////////////////////////////////////////////////////////////////////
+// 
+//    extern HashTbl ReHashTbl(HashTbl H)
+// 
+//    功能：
+//            再散列(针对开放定址法散列)
+// 
+//    参数：
+//			  H：  待处理哈希表
+// 
+//    描述：
+//			  将原散列表扩充两倍
+//
+//    返回：
+//			  再散列后的散列表
+////////////////////////////////////////////////////////////////////////////
+extern HashTbl ReHashTbl(HashTbl H);
 
 #endif // !_HASHOPENADDRESS_H_

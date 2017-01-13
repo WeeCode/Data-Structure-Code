@@ -222,7 +222,26 @@ ElementType RetrieveHashTbl(HashTblPosition P, HashTbl H)
 	
 }
 
+/*Rehashing for open addressing hash tables*/
 HashTbl ReHashTbl(HashTbl H)
 {
-	return HashTbl();
+	int i, oldSize;
+	Cell* oldCells;
+
+	oldSize = H->TableSize;
+	oldCells = H->TheCells;
+
+	H = InitializeHashTbl(2*oldSize);
+
+	for ( i = 0; i < oldSize; i++)
+	{
+		if (oldCells[i].Info == Legitimate)
+		{
+			InsertHashTbl(oldCells[i].Element,H);
+		}
+	}
+
+	free(oldCells);
+
+	return H;
 }
