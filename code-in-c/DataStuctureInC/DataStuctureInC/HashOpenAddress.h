@@ -18,26 +18,26 @@
 #define _HASHOPENADDRESS_H_
 
 typedef unsigned int Index;
-typedef Index Position;
+typedef Index HashTblPosition;
 
 typedef int ElementType;
 typedef struct HashTbl_OpenAddress *HashTbl;
 
 extern HashTbl InitializeHashTbl(int tableSize);
-static int NextPrime(unsigned int limit);
+extern int NextPrime(unsigned int limit);
 
 extern void MakeEmptyHashTbl(HashTbl H);
 
 extern void DestoryHashTbl(HashTbl H);
 
-extern Position FindHashTbl(ElementType Key,HashTbl H);
+extern HashTblPosition FindHashTbl(ElementType Key,HashTbl H);
 
 extern void InsertHashTbl(ElementType Key,HashTbl H);
 static Index Hash(ElementType Key, HashTbl H);
 
 extern void DeleteHashTbl(ElementType Key,HashTbl H);
 
-extern ElementType RetrieveHashTbl(Position P,HashTbl H);
+extern ElementType RetrieveHashTbl(HashTblPosition P,HashTbl H);
 
 static HashTbl ReHashTbl(HashTbl H);
 

@@ -11,6 +11,7 @@
 #include "BinarySearchTree.h"
 #include "AVLTree.h"
 #include "HashSeparateChain.h"
+#include "HashOpenAddress.h"
 
 static int Test_List(void);
 static int test_RadixSort(void);
@@ -20,10 +21,11 @@ static int test_Queue(void);
 static int test_BinarySearchTree(void);
 static int test_AVLTree(void);
 static int test_HashSeparateChain(void);
+static int test_NextPrime(void);
 
 int main()
 {
-	test_HashSeparateChain();
+	test_NextPrime();
 
     return 0;
 }
@@ -273,4 +275,28 @@ int	test_HashSeparateChain(void)
 	DestoryHashTable(H);
 
 	return 0;
+}
+
+int test_NextPrime(void)
+{
+	printf("next prime after 0 is: %d  \n", NextPrime(0));
+
+	printf("next prime after 1 is: %d  \n", NextPrime(1));
+
+	printf("next prime after 2 is: %d  \n", NextPrime(2));
+
+	printf("next prime after 3 is: %d  \n", NextPrime(3));
+
+	printf("next prime after 4 is: %d  \n", NextPrime(4));
+
+	printf("next prime after 5 is: %d  \n", NextPrime(5));
+
+	printf("next prime after 10 is: %d  \n", NextPrime(10));
+
+	printf("next prime after 15 is: %d  \n", NextPrime(15));
+
+	printf("next prime after 25 is: %d  \n", NextPrime(25));
+
+	return 0;
+
 }

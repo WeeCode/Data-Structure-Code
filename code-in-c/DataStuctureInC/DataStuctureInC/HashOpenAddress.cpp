@@ -102,7 +102,7 @@ int NextPrime(unsigned int limit)
 		while (true)
 		{
 			IsPrime = true;
-			for (i = 3; i*i <= limit; i = i + 2)
+			for (i = 3; (unsigned int)i*i <= limit; i = i + 2)
 			{
 				if (limit%i == 0)
 				{
@@ -150,9 +150,9 @@ void DestoryHashTbl(HashTbl H)
 	
 }
 
-Position FindHashTbl(ElementType Key, HashTbl H)
+HashTblPosition FindHashTbl(ElementType Key, HashTbl H)
 {
-	Position CurrentPos;
+	HashTblPosition CurrentPos;
 	int CollisionNum = 0;
 
 	CurrentPos = Hash(Key,H);
@@ -161,7 +161,7 @@ Position FindHashTbl(ElementType Key, HashTbl H)
 		CurrentPos += 2*(++CollisionNum) - 1; // i^2 =(i-1)^2 + 2i -1 
 
 		/*put back if location is past the array*/
-		if (CurrentPos >= H->TableSize)
+		if (CurrentPos >= (unsigned int)H->TableSize)
 		{
 			CurrentPos -= H->TableSize;
 		}
@@ -173,7 +173,7 @@ Position FindHashTbl(ElementType Key, HashTbl H)
 
 void InsertHashTbl(ElementType Key, HashTbl H)
 {
-	Position P;
+	HashTblPosition P;
 
 	P = FindHashTbl(Key,H);
 
@@ -192,7 +192,7 @@ Index Hash(ElementType Key, HashTbl H)
 
 void DeleteHashTbl(ElementType Key, HashTbl H)
 {
-	Position P;
+	HashTblPosition P;
 
 	P = FindHashTbl(Key, H);
 
@@ -202,7 +202,7 @@ void DeleteHashTbl(ElementType Key, HashTbl H)
 	}
 }
 
-ElementType RetrieveHashTbl(Position P, HashTbl H)
+ElementType RetrieveHashTbl(HashTblPosition P, HashTbl H)
 {
 	return H->TheCells[P].Element;
 }
