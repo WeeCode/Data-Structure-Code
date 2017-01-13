@@ -27,6 +27,7 @@ struct BinaryHeap
 	ElementType *Elements;
 };
 
+/*Init Priority Queue,implrmented by binary heap*/
 PriorityQueue InitPriQueue(int maxElements)
 {
 	PriorityQueue PriQ;
@@ -58,6 +59,7 @@ PriorityQueue InitPriQueue(int maxElements)
 
 }
 
+/*Destory Priority Queue , free memory*/
 void DestoryPriQueue(PriorityQueue PriQ)
 {
 	if (PriQ != NULL)
@@ -67,6 +69,7 @@ void DestoryPriQueue(PriorityQueue PriQ)
 	}
 }
 
+/*Make Priority Empty*/
 void MakeEmptyPriQueue(PriorityQueue PriQ)
 {
 	if (PriQ != NULL)
@@ -80,6 +83,7 @@ void MakeEmptyPriQueue(PriorityQueue PriQ)
 	
 }
 
+/*Insert Element X onto priority queue PriQ,using percolate up strategry*/
 void InsertPriQueue(ElementType X, PriorityQueue PriQ)
 {
 	int tmpPos;
@@ -107,6 +111,7 @@ void InsertPriQueue(ElementType X, PriorityQueue PriQ)
 	
 }
 
+/*Delete and return minim Element X in priority queue PriQ,using percolate down strategry*/
 ElementType DeletMinPriQueue(PriorityQueue PriQ)
 {
 	ElementType min,last;
@@ -145,6 +150,7 @@ ElementType DeletMinPriQueue(PriorityQueue PriQ)
 	return min;
 }
 
+/*Find minim Element X in priority queue PriQ*/
 ElementType FindMinPriQueue(PriorityQueue PriQ)
 {
 	if (!IsEmptyPriQueue(PriQ))
@@ -158,11 +164,13 @@ ElementType FindMinPriQueue(PriorityQueue PriQ)
 	}
 }
 
+/*Return true/1 if Priority Queue is empty*/
 int IsEmptyPriQueue(PriorityQueue PriQ)
 {
 	return PriQ->Size == 0;
 }
 
+/*Return true/1 if Priority Queue is full*/
 int IsFullPriQueue(PriorityQueue PriQ)
 {
 	return PriQ->Size == PriQ->Capacity;
