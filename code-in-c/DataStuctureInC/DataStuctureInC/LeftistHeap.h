@@ -13,3 +13,24 @@
 * 说    明：左式堆（优先队列）--二叉树实现
 */
 #pragma once
+#include "Tree.h"
+
+#ifndef _LEFTISTHEAP_H_
+#define _LEFTISTHEAP_H_
+
+extern LeftHeap InitLeftHeap(void);
+
+extern ElementType FindMinLeftHeap(LeftHeap LH);
+
+extern int IsEmptyLeftHeap(LeftHeap LH);
+
+extern LeftHeap MergeLeftHeap(LeftHeap LH1, LeftHeap LH2);
+
+#define InsertLeftHeap(X,LH) ( LH = Insert1LeftHeap((X) ,LH) )
+extern LeftHeap Insert1LeftHeap(ElementType X,LeftHeap LH);
+
+extern LeftHeap DeleteMinLeftHeap(LeftHeap LH);
+
+
+#endif // !_LEFTISTHEAP_H_
+

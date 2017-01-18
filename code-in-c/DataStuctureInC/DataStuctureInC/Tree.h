@@ -49,5 +49,15 @@ struct AvlNode
 	int Height;
 };
 
+/*Leftist Heap tree node,Applicable to Leftist Heap(Priority Queue)*/
+typedef struct LeftHeapNode *PtrToLeftHeapNode;
+typedef struct LeftHeapNode *LeftHeap;
+struct LeftHeapNode
+{
+	ElementType Element;
+	LeftHeap Left;
+	LeftHeap Right;
+	int Npl;
+};
 #endif
 

@@ -16,3 +16,33 @@
 #include "stdafx.h"
 #include <stdlib.h>
 #include "LeftistHeap.h"
+
+LeftHeap InitLeftHeap(void)
+{
+	return LeftHeap();
+}
+
+ElementType FindMinLeftHeap(LeftHeap LH)
+{
+	return ElementType();
+}
+
+int IsEmptyLeftHeap(LeftHeap LH)
+{
+	return 0;
+}
+
+LeftHeap MergeLeftHeap(LeftHeap LH1, LeftHeap LH2)
+{
+	return LeftHeap();
+}
+
+LeftHeap Insert1LeftHeap(ElementType X, LeftHeap LH)
+{
+	return LeftHeap();
+}
+
+LeftHeap DeleteMinLeftHeap(LeftHeap LH)
+{
+	return LeftHeap();
+}
